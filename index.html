@@ -22,10 +22,7 @@
 		var device;
 
 		navigator.usb.requestDevice({ filters: [{
-				vendorId: 0x13FE,
-				classCode: 0x08, // vendor-specific
-				subclassCode: 0x06,
-				protocolCode: 0x50
+				vendorId: 0x154B
 		}]})
 		.then(selectedDevice => {
 			device = selectedDevice;
@@ -52,17 +49,14 @@
 		  let device;
 		  try {
 			device =navigator.usb.requestDevice({ filters: [{
-				vendorId: 0x154B,
-				classCode: 0x08, // vendor-specific
-				subclassCode: 0x06,
-				protocolCode: 0x50
+				vendorId: 0x154B
 			}]});
 			
 			device.open()
       .then(() => device.selectConfiguration(1))
       .then(() => device.claimInterface(0));
 			
-			//device.transferOut(1, data);
+			device.transferOut(1, data);
 			
 			let receivedData = data.transferIn(1, 6);
 			
